@@ -1,24 +1,28 @@
 package main
 
 import (
-	"fmt"
-	"net/http"
+	"log"
 	"os/exec"
+
+	"github.com/gofiber/fiber/v2"
+	"github.com/gofiber/template/html/v2"
 )
-
-func homePage(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintf(w, "My Awesome Go App")
-}
-
-func setupRoutes() {
-	http.HandleFunc("/", homePage)
-}
 
 func main() {
 	cmd := exec.Command("/bin/sh", "refresh.sh")
-	fmt.Println("Go Web App Started on Port 3000")
-	setupRoutes()
+	engine := html.New("./views", ".html")
+	app := fiber.New(fiber.Config{
+		Views: engine,
+	})
+	app.Static("/", "./public")
 
+
+	app.Get("/", func(c *fiber.Ctx) error {
+		return c.Render("index", fiber.Map{
+			"title": "Add Your Comment!",
+		}, "layouts/main")
+	})
+	
 	go cmd.Run()
-	go http.ListenAndServe(":3000", nil)
+	go log.Fatal(app.Listen(":3000"))
 }
