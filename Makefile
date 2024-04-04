@@ -3,7 +3,7 @@ tailwind:
 	echo "Generating tailwindcss files..." \
 
 build: tailwind
-	go build -o bin ./cmd/server/main.go
+	go build -o bin main.go
 
 build_docker: tailwind
 	docker build -t awoelf/go-web-app .
