@@ -26,3 +26,15 @@ func APIRouter() *fiber.App {
 
 	return api
 }
+
+func ViewsRouter() *fiber.App {
+	views := fiber.New()
+
+	views.Get("/", func(c *fiber.Ctx) error {
+		return c.Render("index", fiber.Map{
+			"title": "Add Your Comment!",
+		})
+	})
+
+	return views
+}

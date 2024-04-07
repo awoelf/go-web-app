@@ -30,6 +30,7 @@ func main() {
 	if err != nil {
 		log.Panic(err)
 	}
+	defer dbConn.Client.Close()
 
 	services.Register(dbConn.Client)
 
@@ -40,13 +41,7 @@ func main() {
 	})
 	app.Static("/", "./public")
 
-	app.Get("/", func(c *fiber.Ctx) error {
-		return c.Render("index", fiber.Map{
-			"title": "Add Your Comment!",
-		})
-	})
-
-	// Add api route and use app.Mount("/api", api) 
+	app.Mount("/", router.ViewsRouter())
 	app.Mount("/api", router.APIRouter())
 
 	go cmd.Run()
