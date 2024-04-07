@@ -20,6 +20,18 @@ func Connect() (*Database, error) {
 
 	defer db.Close()
 
+	sqlStmt := `create table if not exists comments (
+		id integer not null primary key,
+		name text not null,
+		subject text not null,
+		commentText text not null,
+		createdAt datetime default current_timestamp
+	)`
+
+	_, err = db.Exec(sqlStmt)
+	if err != nil {
+		log.Fatal(err)
+	}
 	// Check connection to db
 	if err := db.Ping(); err != nil {
 		log.Fatal(err)
