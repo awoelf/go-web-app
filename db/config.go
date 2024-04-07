@@ -20,7 +20,7 @@ func Connect() (*Database, error) {
 
 	defer db.Close()
 
-	createTable := `create table if not exists comments (
+	initTable := `create table if not exists comments (
 		id text not null primary key,
 		name text not null,
 		subject text not null,
@@ -28,8 +28,8 @@ func Connect() (*Database, error) {
 		createdAt datetime default current_timestamp,
 		updatedAt datetime default current_timestamp
 	)`
-
-	_, err = db.Exec(createTable)
+	
+	_, err = db.Exec(initTable)
 	if err != nil {
 		log.Fatal(err)
 	}

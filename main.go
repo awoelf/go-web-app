@@ -6,6 +6,7 @@ import (
 	"os/exec"
 
 	"github.com/awoelf/go-web-app/db"
+	"github.com/awoelf/go-web-app/router"
 	"github.com/awoelf/go-web-app/services"
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/template/html/v2"
@@ -46,6 +47,7 @@ func main() {
 	})
 
 	// Add api route and use app.Mount("/api", api) 
+	app.Mount("/api", router.APIRouter())
 
 	go cmd.Run()
 	go log.Fatal(app.Listen(":" + port))
