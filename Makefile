@@ -1,25 +1,25 @@
 include .env
 
 tailwind:
-	@bun run tailwindcss --config tailwind.config.js -i index.css -o public/css/styles.css
+	@bun run tailwindcss --config tailwind.config.js -i index.css -o ${TAILWIND_CSS}
 	@echo "Generating tailwindcss files..."
 
 build: tailwind
-	@if [ -f "./tmp/main" ]; then \
+	@if [ -f "${BINARY}" ]; then \
 		echo "Deleting old build file"; \
-		rm -rf ./tmp/main; \
+		rm -rf ${BINARY}; \
 	fi 
-	@go build -o ./tmp/ main.go;
+	@go build -o ${BINARY} main.go;
 	@echo "Building app..." 
 
 build_docker: tailwind
-	docker build -t awoelf/go-web-app .
+	docker build -t ${DOCKER_CONTAINER} .
 
 run_docker:
-	docker run -it -p ${PORT}:${PORT} awoelf/go-web-app
+	docker run -it -p ${PORT}:${PORT} ${DOCKER_CONTAINER}
 
 stop_docker:
-	docker stop awoelf/go-web-app
+	docker stop ${DOCKER_CONTAINER}
 
 run:
 	air
