@@ -8,12 +8,12 @@ import (
 )
 
 type Comment struct {
-	ID          string    `json:"id"`
-	Name        string    `json:"name"`
-	Subject     string    `json:"subject"`
-	CommentText string    `json:"commentText"`
-	CreatedAt   time.Time `json:"createdAt"`
-	UpdatedAt   time.Time `json:"updatedAt"`
+	ID          string    `json:"ID"`
+	Name        string    `json:"Name"`
+	Subject     string    `json:"Subject"`
+	CommentText string    `json:"CommentText"`
+	CreatedAt   time.Time `json:"CreatedAt"`
+	UpdatedAt   time.Time `json:"UpdatedAt"`
 }
 
 func setTimeout() (context.Context, context.CancelFunc) {

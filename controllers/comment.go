@@ -51,6 +51,8 @@ func CreateComment(c *fiber.Ctx) error {
 		return err
 	}
 
+	log.Print(c.Body())
+
 	res, err := comment.CreateComment(body)
 	if err != nil {
 		log.Print(err)
