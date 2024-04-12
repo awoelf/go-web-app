@@ -15,6 +15,9 @@ build: tailwind
 build_docker: tailwind
 	docker build -t ${DOCKER_CONTAINER} .
 
+push_docker:
+	docker image push awoelf/go-web-app:latest
+
 run_docker:
 	docker run -it -p ${PORT}:${PORT} ${DOCKER_CONTAINER}
 
