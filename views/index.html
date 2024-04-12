@@ -4,6 +4,7 @@
         hx-post="/api/comment" 
         hx-target="#comments-section"
         hx-swap="afterbegin"
+        hx-on::after-request="this.reset()"
         class="grid grid-cols-1 gap-6"
     >
         <label class="block">
@@ -12,6 +13,7 @@
                 type="text" 
                 name="Name"
                 class="form-input mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 bg-transparent" 
+                autocomplete="off"
             />
         </label>
         <label class="block">
@@ -20,13 +22,16 @@
                 type="text" 
                 name="Subject"
                 class="form-input mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 bg-transparent" 
+                autocomplete="off"
             />
         </label>
         <label class="block">
             <span>Comment</span>
             <textarea 
                 name="CommentText"
-                class="form-textarea mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 bg-transparent">
+                class="form-textarea mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 bg-transparent"
+                autocomplete="off"
+            >
             </textarea>
         </label>
         <button type="submit"

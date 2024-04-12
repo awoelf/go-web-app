@@ -11,7 +11,11 @@
     <div class="flex justify-between">
         <p>Comment by {{.Name}}</p>
         <button
-            class="bg-blue-600 rounded-md aspect-square hover:bg-indigo-600 hover:-translate-y-1 hover:scale-110 motion-reduce:transition-none transition ease-in-out delay-100">
+            hx-delete="/api/comment/{{.ID}}"
+            hx-target="#{{.ID}}"
+            hx-swap="delete"
+            class="bg-blue-600 rounded-md aspect-square hover:bg-indigo-600 hover:-translate-y-1 hover:scale-110 motion-reduce:transition-none transition ease-in-out delay-100"
+        >
             <span class="bi bi-trash p-2" />
         </button>
     </div>
@@ -21,5 +25,3 @@
     </div>
 </div>
 {{end}}
-
-
