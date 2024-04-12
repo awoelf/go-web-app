@@ -17,8 +17,14 @@ func GetAllComments(c *fiber.Ctx) error {
 		log.Print(err)
 		return err
 	}
-	c.Status(fiber.StatusOK).JSON(res)
-	
+
+	c.Status(fiber.StatusOK).Set(fiber.HeaderContentType, fiber.MIMETextHTML)
+	if len(res) > 0 {
+		c.Render("partials/comment", fiber.Map{
+			"comments": res,
+		})
+	}
+
 	return nil
 }
 
@@ -39,13 +45,11 @@ func GetComment(c *fiber.Ctx) error {
 // POST/api/comment
 func CreateComment(c *fiber.Ctx) error {
 	var body services.Comment
-	
+
 	if err := c.BodyParser(&body); err != nil {
 		log.Print(err)
 		return err
 	}
-
-	log.Print(body.CommentText)
 
 	res, err := comment.CreateComment(body)
 	if err != nil {
@@ -53,9 +57,10 @@ func CreateComment(c *fiber.Ctx) error {
 		return err
 	}
 
-	c.Status(fiber.StatusOK).JSON(res)
-
-	return nil
+	c.Status(fiber.StatusOK).Set(fiber.HeaderContentType, fiber.MIMETextHTML)
+	return c.Render("partials/comment", fiber.Map{
+		"comment": res,
+	})
 }
 
 // PUT/api/comment/{id}
@@ -63,7 +68,7 @@ func UpdateComment(c *fiber.Ctx) error {
 	id := c.Params("id")
 
 	var body services.Comment
-	
+
 	if err := c.BodyParser(&body); err != nil {
 		log.Print(err)
 		return err
@@ -89,6 +94,6 @@ func DeleteComment(c *fiber.Ctx) error {
 	}
 
 	c.Status(fiber.StatusOK).SendString("Message deleted successfully.")
-	
+
 	return nil
 }

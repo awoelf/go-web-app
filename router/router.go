@@ -33,7 +33,7 @@ func ViewsRouter() *fiber.App {
 	views.Get("/", func(c *fiber.Ctx) error {
 		return c.Render("index", fiber.Map{
 			"title": "Add Your Comment!",
-		})
+		}, "layouts/main")
 	})
 
 	return views

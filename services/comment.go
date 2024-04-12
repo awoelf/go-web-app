@@ -25,7 +25,7 @@ func (c *Comment) GetAllComments() ([]*Comment, error) {
 	ctx, cancel := setTimeout()
 	defer cancel()
 
-	query := `SELECT id, name, subject, commentText, createdAt, updatedAt FROM comments`
+	query := `SELECT id, name, subject, commentText, createdAt, updatedAt FROM comments ORDER BY createdAt DESC`
 	rows, err := db.QueryContext(ctx, query)
 	if err != nil {
 		return nil, err
@@ -123,12 +123,12 @@ func (c *Comment) CreateComment(comment Comment) (*Comment, error) {
 		VALUES($1, $2, $3, $4, $5, $6) returning *
 	`
 
-	id := utils.GenerateId()
+	comment.ID = utils.GenerateId()
 
 	_, err := db.ExecContext(
 		ctx,
 		query,
-		id,
+		comment.ID,
 		comment.Name,
 		comment.Subject,
 		comment.CommentText,
