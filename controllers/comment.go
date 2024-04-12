@@ -40,10 +40,12 @@ func GetComment(c *fiber.Ctx) error {
 func CreateComment(c *fiber.Ctx) error {
 	var body services.Comment
 	
-	if err := c.ReqHeaderParser(&body); err != nil {
+	if err := c.BodyParser(&body); err != nil {
 		log.Print(err)
 		return err
 	}
+
+	log.Print(body.CommentText)
 
 	res, err := comment.CreateComment(body)
 	if err != nil {
@@ -62,7 +64,7 @@ func UpdateComment(c *fiber.Ctx) error {
 
 	var body services.Comment
 	
-	if err := c.ReqHeaderParser(&body); err != nil {
+	if err := c.BodyParser(&body); err != nil {
 		log.Print(err)
 		return err
 	}

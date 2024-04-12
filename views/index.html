@@ -1,33 +1,41 @@
 <div class="grow space-y-4">
     <p class="text-center">Use the form to add your comment below!</p>
-    <form class="grid grid-cols-1 gap-6">
+    <form hx-post="/api/comment" hx-target="#comments-section" class="grid grid-cols-1 gap-6">
         <label class="block">
             <span>Your name</span>
-            <input type="text" name="name"
-                class="form-input mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 bg-transparent" />
+            <input 
+                type="text" 
+                name="Name"
+                class="form-input mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 bg-transparent" 
+            />
         </label>
         <label class="block">
             <span>Subject</span>
-            <input type="text" name="subject"
-                class="form-input mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 bg-transparent" />
+            <input 
+                type="text" 
+                name="Subject"
+                class="form-input mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 bg-transparent" 
+            />
         </label>
         <label class="block">
             <span>Comment</span>
-            <textarea name="commentText"
-                class="form-textarea mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 bg-transparent"></textarea>
+            <textarea 
+                name="CommentText"
+                class="form-textarea mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 bg-transparent">
+            </textarea>
         </label>
-        <button hx-post="/" type="submit"
-            class="bg-blue-600 rounded-md py-3 hover:bg-indigo-600 hover:-translate-y-1 hover:scale-110 motion-reduce:transition-none transition ease-in-out delay-150">
+        <button type="submit"
+            class="bg-blue-600 rounded-md py-3 hover:bg-indigo-600 hover:-translate-y-1 hover:scale-110 motion-reduce:transition-none transition ease-in-out delay-100">
             <span>Submit</span>
         </button>
     </form>
-    <div class="comment-section space-y-2">
-        {{range $key, $value := .Comments}}
-        <div class="comment" id=$key>
+    <div id="comments-section" class="space-y-2" hx-get="/api/comments" hx-trigger="load">
+        <!-- {{range $key, $value := .Comments}}
+        <div id=$key>
             <div class="flex justify-between">
                 <p>Comment by {{.Name}}</p>
                 <button
-                    class="bg-blue-600 rounded-md aspect-square hover:bg-indigo-600 hover:-translate-y-1 hover:scale-110 motion-reduce:transition-none transition ease-in-out delay-150">
+                    class="bg-blue-600 rounded-md aspect-square hover:bg-indigo-600 hover:-translate-y-1 hover:scale-110 motion-reduce:transition-none transition ease-in-out delay-100">
                     <span class="bi bi-trash p-2" />
                 </button>
             </div>
@@ -36,6 +44,6 @@
                 <p class="block">{{.CommentText}}</p>
             </div>
         </div>
-        {{end}}
+        {{end}} -->
     </div>
 </div>
