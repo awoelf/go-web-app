@@ -7,9 +7,9 @@
 {{end}}
 
 {{define "comment"}}
-<div id={{.ID}}>
+<div class="py-2" id={{.ID}}>
     <div class="flex justify-between">
-        <p>Comment by {{.Name}}</p>
+        <p class="suez-one-regular">Comment by {{.Name}}</p>
         <button
             hx-delete="/api/comment/{{.ID}}"
             hx-target="#{{.ID}}"
@@ -20,7 +20,7 @@
         </button>
     </div>
     <div>
-        <p class="block">{{.Subject}}</p>
+        <p class="block italic">{{.Subject}}</p>
         <p class="block">{{.CommentText}}</p>
     </div>
 </div>

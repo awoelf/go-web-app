@@ -4,19 +4,19 @@
         class="grid grid-cols-1 gap-6">
         <label class="block">
             <span>Your name</span>
-            <input type="text" name="Name"
+            <input required type="text" name="Name"
                 class="form-input mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 bg-transparent"
                 autocomplete="off" />
         </label>
         <label class="block">
             <span>Subject</span>
-            <input type="text" name="Subject"
+            <input required type="text" name="Subject"
                 class="form-input mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 bg-transparent"
                 autocomplete="off" />
         </label>
         <label class="block">
             <span>Comment</span>
-            <textarea name="CommentText" rows="5"
+            <textarea required name="CommentText" rows="5"
                 class="form-textarea mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 bg-transparent"
                 autocomplete="off"></textarea>
         </label>
@@ -25,6 +25,6 @@
             <span>Submit</span>
         </button>
     </form>
-    <div id="comments-section" class="space-y-2" hx-get="/api/comments" hx-trigger="load">
+    <div id="comments-section" class="space-y-2 divide-y" hx-get="/api/comments" hx-trigger="load">
     </div>
 </div>
