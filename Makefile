@@ -12,16 +12,16 @@ build: tailwind
 	@go build -o ${BINARY} main.go;
 	@echo "Building app..." 
 
-build_docker: tailwind
+docker_build: tailwind
 	docker build -t ${DOCKER_CONTAINER} .
 
-push_docker:
+docker_push:
 	docker image push awoelf/go-web-app:latest
 
-run_docker:
+docker_run:
 	docker run -it -p ${PORT}:${PORT} ${DOCKER_CONTAINER}
 
-stop_docker:
+docker_stop:
 	docker stop ${DOCKER_CONTAINER}
 
 run:
