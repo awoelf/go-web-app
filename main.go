@@ -20,12 +20,7 @@ func loadEnv() {
 	}
 }
 
-func main() {
-	cmd := exec.Command("/bin/sh", "refresh.sh")
-	
-	loadEnv()
-	port := os.Getenv("PORT")
-
+func newApp() *fiber.App {
 	dbConn, err := db.Connect()
 	if err != nil {
 		log.Panic(err)
@@ -35,13 +30,24 @@ func main() {
 	services.Register(dbConn.Client)
 
 	engine := html.New("./views", ".html")
-	app := fiber.New(fiber.Config{
+	f := fiber.New(fiber.Config{
 		Views: engine,
 	})
-	app.Static("/", "./public")
+	f.Static("/", "./public")
 
-	app.Mount("/", router.ViewsRouter())
-	app.Mount("/api", router.APIRouter())
+	f.Mount("/", router.ViewsRouter())
+	f.Mount("/api", router.APIRouter())
+
+	return f
+}
+
+func main() {
+	cmd := exec.Command("/bin/sh", "refresh.sh")
+	
+	loadEnv()
+	port := os.Getenv("PORT")
+
+	app := newApp()
 
 	go cmd.Run()
 	go log.Fatal(app.Listen(":" + port))
