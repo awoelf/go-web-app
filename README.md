@@ -3,7 +3,7 @@
 ![GitHub last commit](https://img.shields.io/github/last-commit/awoelf/go-web-app)
 
 <div align='center'>
-  <a href='https://citation-maker.netlify.app/'>
+  <a href='https://go-web-app-q9ez.onrender.com'>
     <img src='./images/comment.png' width='500' style='margin:auto'/>
   </a> 
 </div>
